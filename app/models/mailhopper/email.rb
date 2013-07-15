@@ -1,7 +1,7 @@
 module Mailhopper
   class Email < ActiveRecord::Base
-    default_scope :order => 'created_at DESC'
-    scope :unsent, :conditions => 'sent_at is null'
+    default_scope { order('created_at DESC') }
+    scope :unsent, -> { where('sent_at is null') }
 
     validates :from_address, :presence => true
 
